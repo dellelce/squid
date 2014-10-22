@@ -135,6 +135,9 @@ SQUIDCEXTERN int WIN32_truncate(const char *pathname, off_t length);
 #endif
 
 /* All three compiler systems need these: */
+
+// but not any recent cygwin
+#ifndef __CYGWIN__
 #define chdir _chdir
 #define dup _dup
 #define dup2 _dup2
@@ -176,11 +179,13 @@ SQUIDCEXTERN int WIN32_truncate(const char *pathname, off_t length);
 #define S_IEXEC  _S_IEXEC
 
 #define S_IRWXO 007
+#endif
 
 #if defined(_MSC_VER)
 #define	S_ISDIR(m) (((m) & _S_IFDIR) == _S_IFDIR)
 #endif
 
+#ifndef __CYGWIN__
 #define	SIGHUP	1	/* hangup */
 #define	SIGKILL	9	/* kill (cannot be caught or ignored) */
 #define	SIGBUS	10	/* bus error */
@@ -188,6 +193,7 @@ SQUIDCEXTERN int WIN32_truncate(const char *pathname, off_t length);
 #define	SIGCHLD	20	/* to parent on child stop or exit */
 #define SIGUSR1 30	/* user defined signal 1 */
 #define SIGUSR2 31	/* user defined signal 2 */
+#endif
 
 #if _SQUID_MINGW_
 typedef unsigned char boolean;
@@ -200,6 +206,7 @@ typedef int uid_t;
 typedef int gid_t;
 #endif
 
+#ifndef __CYGWIN__
 struct passwd {
     char    *pw_name;      /* user name */
     char    *pw_passwd;    /* user password */
@@ -216,6 +223,7 @@ struct group {
     gid_t   gr_gid;        /* group id */
     char    **gr_mem;      /* group members */
 };
+#endif
 
 #if !_SQUID_MINGW_
 struct statfs {
