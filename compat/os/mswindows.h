@@ -851,6 +851,7 @@ SQUIDCEXTERN int statfs(const char *, struct statfs *);
 SQUIDCEXTERN struct passwd * getpwnam(char *unused);
 SQUIDCEXTERN struct group * getgrnam(char *unused);
 
+#ifndef __CYGWIN__
 static inline uid_t
 geteuid(void)
 {
@@ -891,6 +892,7 @@ setgid (gid_t gid)
 {
     return 0;
 }
+#endif /* __CYGWIN__ */
 
 /* for some reason autoconf misdetects getpagesize.. */
 #if HAVE_GETPAGESIZE && _SQUID_MINGW_
