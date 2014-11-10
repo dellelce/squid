@@ -442,6 +442,8 @@ open(const char *filename, int oflag, int pmode = 0)
 }
 #endif
 
+//cygwin does not this.....
+#ifndef __CYGWIN__
 inline int
 read(int fd, void * buf, size_t siz)
 {
@@ -473,6 +475,7 @@ index(const char *s, int c)
 {
     return (char *)strchr(s,c);
 }
+#endif // __CYGWIN__
 
 // stdlib <functional> definitions are required before std API redefinitions.
 #include <functional>
