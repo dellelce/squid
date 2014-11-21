@@ -374,6 +374,7 @@ typedef char * caddr_t;
 #undef FD_ISSET
 #define FD_ISSET(fd, set) Win32__WSAFDIsSet(fd, (fd_set FAR *)(set))
 
+#ifndef __CYGWIN__
 /* internal to Microsoft CRTLIB */
 typedef struct {
     long osfhnd;    /* underlying OS file HANDLE */
@@ -390,6 +391,7 @@ typedef struct {
 #define _osfile(i)  ( _pioinfo(i)->osfile )
 #define _osfhnd(i)  ( _pioinfo(i)->osfhnd )
 #define FOPEN           0x01    /* file handle open */
+#endif
 
 #if defined(_MSC_VER)
 SQUIDCEXTERN _CRTIMP ioinfo * __pioinfo[];
