@@ -405,6 +405,7 @@ SQUIDCEXTERN int _free_osfhnd(int);
 
 SQUIDCEXTERN THREADLOCAL int ws32_result;
 
+#ifndef __CYGWIN__
 #if defined(__cplusplus)
 
 inline int
@@ -443,6 +444,7 @@ open(const char *filename, int oflag, int pmode = 0)
     return _open(filename, oflag, pmode & (_S_IREAD | _S_IWRITE));
 }
 #endif
+#endif // __CYGWIN__
 
 //cygwin does not this.....
 #ifndef __CYGWIN__
